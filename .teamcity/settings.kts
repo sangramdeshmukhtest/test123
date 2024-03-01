@@ -218,7 +218,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
 
     failureConditions {
         failOnText {
-            enabled = "%system.coverage%".equals("true")
+            enabled = DslContext.getParameter(name = "coverage") == "true"
             conditionType = BuildFailureOnText.ConditionType.CONTAINS
             pattern = "Working"
             failureMessage = "Good job"
