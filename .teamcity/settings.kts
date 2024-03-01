@@ -195,7 +195,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
     failureConditions {
         failOnText {
             conditionType = BuildFailureOnText.ConditionType.CONTAINS
-            pattern = "working"
+            pattern = "Working"
             failureMessage = "Good job"
             reverse = false
             stopBuildOnFailure = true
