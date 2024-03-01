@@ -195,8 +195,8 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             }
         }
     }
-
-    failureConditions {
+    
+    failureConditions{
         failOnText {
             enabled = false
             conditionType = BuildFailureOnText.ConditionType.CONTAINS
