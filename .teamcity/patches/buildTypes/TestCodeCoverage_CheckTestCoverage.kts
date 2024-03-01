@@ -23,6 +23,9 @@ changeBuildType(RelativeId("TestCodeCoverage_CheckTestCoverage")) {
         }
         trigger1.apply {
             enabled = true
+            quietPeriod = 5
+            perCheckinTriggering = false
+            enableQueueOptimization = true
 
         }
     }
