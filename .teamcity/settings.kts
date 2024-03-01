@@ -1,4 +1,5 @@
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.powerShell
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.failureConditions.BuildFailureOnMetric
 import jetbrains.buildServer.configs.kotlin.failureConditions.failOnMetricChange
@@ -178,4 +179,14 @@ object TestCodeCoverage : Project({
 
 object TestCodeCoverage_CheckTestCoverage : BuildType({
     name = "CheckTestCoverage"
+
+    steps {
+        powerShell {
+            name = "check_code"
+            id = "check_code"
+            scriptMode = script {
+                content = """echo "Working""""
+            }
+        }
+    }
 })
