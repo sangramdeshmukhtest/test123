@@ -36,10 +36,7 @@ changeBuildType(RelativeId("TestCodeCoverage_CheckTestCoverage")) {
         update<PowerShellStep>(0) {
             clearConditions()
             scriptMode = script {
-                content = """
-                    echo "Started Working"
-                    echo %coverage%
-                """.trimIndent()
+                content = """echo "Started Working""""
             }
         }
     }
