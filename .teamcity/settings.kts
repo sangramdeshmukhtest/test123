@@ -208,6 +208,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
 
     triggers {
         vcs {
+            enabled = false
             quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_CUSTOM
             quietPeriod = 10
             perCheckinTriggering = true
