@@ -11,6 +11,17 @@ To apply the patch, change the buildType with id = 'TestCodeCoverage_CheckTestCo
 accordingly, and delete the patch script.
 */
 changeBuildType(RelativeId("TestCodeCoverage_CheckTestCoverage")) {
+    params {
+        remove {
+            checkbox("system.coverage", "true", display = ParameterDisplay.PROMPT,
+                      checked = "true", unchecked = "false")
+        }
+        add {
+            checkbox("coverage", "true", display = ParameterDisplay.PROMPT,
+                      checked = "true", unchecked = "false")
+        }
+    }
+
     triggers {
         val trigger1 = find<VcsTrigger> {
             vcs {
