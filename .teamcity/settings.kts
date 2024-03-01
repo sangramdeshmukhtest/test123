@@ -5,6 +5,8 @@ import jetbrains.buildServer.configs.kotlin.failureConditions.BuildFailureOnMetr
 import jetbrains.buildServer.configs.kotlin.failureConditions.BuildFailureOnText
 import jetbrains.buildServer.configs.kotlin.failureConditions.failOnMetricChange
 import jetbrains.buildServer.configs.kotlin.failureConditions.failOnText
+import jetbrains.buildServer.configs.kotlin.triggers.VcsTrigger
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -193,6 +195,15 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             scriptMode = script {
                 content = """echo "Working""""
             }
+        }
+    }
+
+    triggers {
+        vcs {
+            quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_CUSTOM
+            quietPeriod = 10
+            perCheckinTriggering = true
+            enableQueueOptimization = false
         }
     }
 
