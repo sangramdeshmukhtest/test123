@@ -184,6 +184,11 @@ object TestCodeCoverage : Project({
 object TestCodeCoverage_CheckTestCoverage : BuildType({
     name = "CheckTestCoverage"
 
+    params {
+        checkbox("system.coverage", "true", display = ParameterDisplay.PROMPT,
+                  checked = "true", unchecked = "false")
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
