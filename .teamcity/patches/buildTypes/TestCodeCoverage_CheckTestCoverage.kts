@@ -18,10 +18,6 @@ changeBuildType(RelativeId("TestCodeCoverage_CheckTestCoverage")) {
             checkbox("system.coverage", "true", display = ParameterDisplay.PROMPT,
                       checked = "true", unchecked = "false")
         }
-        add {
-            checkbox("coverage", "true", display = ParameterDisplay.PROMPT,
-                      checked = "true", unchecked = "false")
-        }
     }
 
     expectSteps {
