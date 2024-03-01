@@ -1,6 +1,8 @@
 package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.PowerShellStep
+import jetbrains.buildServer.configs.kotlin.buildSteps.powerShell
 import jetbrains.buildServer.configs.kotlin.triggers.VcsTrigger
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.ui.*
@@ -19,6 +21,30 @@ changeBuildType(RelativeId("TestCodeCoverage_CheckTestCoverage")) {
         add {
             checkbox("coverage", "true", display = ParameterDisplay.PROMPT,
                       checked = "true", unchecked = "false")
+        }
+    }
+
+    expectSteps {
+        powerShell {
+            name = "check_code"
+            id = "check_code"
+            scriptMode = script {
+                content = """
+                    echo "Started Working"
+                    echo %system.coverage%
+                """.trimIndent()
+            }
+        }
+    }
+    steps {
+        update<PowerShellStep>(0) {
+            clearConditions()
+            scriptMode = script {
+                content = """
+                    echo "Started Working"
+                    echo %coverage%
+                """.trimIndent()
+            }
         }
     }
 
