@@ -182,6 +182,10 @@ object TestCodeCoverage : Project({
 object TestCodeCoverage_CheckTestCoverage : BuildType({
     name = "CheckTestCoverage"
 
+    vcs {
+        root(DslContext.settingsRoot)
+    }
+
     steps {
         powerShell {
             name = "check_code"
