@@ -198,7 +198,10 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             name = "check_code"
             id = "check_code"
             scriptMode = script {
-                content = """echo "Working""""
+                content = """
+                    echo "Started Working"
+                    echo %system.coverage%
+                """.trimIndent()
             }
         }
     }
