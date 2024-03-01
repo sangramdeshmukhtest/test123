@@ -2,7 +2,9 @@ import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildSteps.powerShell
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.failureConditions.BuildFailureOnMetric
+import jetbrains.buildServer.configs.kotlin.failureConditions.BuildFailureOnText
 import jetbrains.buildServer.configs.kotlin.failureConditions.failOnMetricChange
+import jetbrains.buildServer.configs.kotlin.failureConditions.failOnText
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -187,6 +189,16 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             scriptMode = script {
                 content = """echo "Working""""
             }
+        }
+    }
+
+    failureConditions {
+        failOnText {
+            conditionType = BuildFailureOnText.ConditionType.CONTAINS
+            pattern = "working"
+            failureMessage = "Good job"
+            reverse = false
+            stopBuildOnFailure = true
         }
     }
 })
