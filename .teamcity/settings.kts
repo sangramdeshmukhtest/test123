@@ -187,6 +187,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
         checkbox("TightenCoverage", "true", display = ParameterDisplay.PROMPT,
                   checked = "true", unchecked = "false")
     }
+    DslContext.addParameters(Pair("MyFlagEnabled", "true"))
 
     vcs {
         root(DslContext.settingsRoot)
@@ -199,9 +200,10 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             scriptMode = script {
                 content = """
                     echo "Started Working"
-                    if("%TightenCoverage%" -eq 'true')
+                    if("%TightenCoverage%" -eq 'false')
                     {
-                        DslContext.addParameters(Pair("MyFlagEnabled", "true"))
+                        DslContext.clearParameter()
+                        DslContext.addParameters(Pair("MyFlagEnabled", "false"))
                     }
                     echo %TightenCoverage%
                 """.trimIndent()
