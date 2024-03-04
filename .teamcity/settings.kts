@@ -187,7 +187,6 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
         checkbox("TightenCoverage", "true",
                   checked = "true", unchecked = "false")
     }
-    DslContext.addParameters(Pair("MyFlagEnabled", "true"))
 
     vcs {
         root(DslContext.settingsRoot)
