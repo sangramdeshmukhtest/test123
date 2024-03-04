@@ -202,7 +202,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
                     echo "%TightenCoverage%"
                     if("%TightenCoverage%" -eq 'false')
                     {
-                        DslContext.clearParameter()
+                        DslContext.clearParameters()
                         DslContext.addParameters(Pair("MyFlagEnabled", "false"))
                     }
                     echo %TightenCoverage%
