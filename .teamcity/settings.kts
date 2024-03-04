@@ -183,7 +183,6 @@ object TestCodeCoverage : Project({
 
 object TestCodeCoverage_CheckTestCoverage : BuildType({
     name = "CheckTestCoverage"
-    DslContext.addParameters("MyFlagEnabled" to "true")
     params {
         checkbox("TightenCoverage", "true", display = ParameterDisplay.PROMPT,
                   checked = "true", unchecked = "false")
@@ -200,10 +199,9 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             scriptMode = script {
                 content = """
                     echo "Started Working"
-                    if("%TightenCoverage%" -eq 'false')
+                    if("%TightenCoverage%" -eq 'true')
                     {
-                        DslContext.clearParameters()
-                        DslContext.addParameters("MyFlagEnabled" to "false")
+                        DslContext.addParameters(Pair("MyFlagEnabled", "true"))
                     }
                     echo %TightenCoverage%
                 """.trimIndent()
