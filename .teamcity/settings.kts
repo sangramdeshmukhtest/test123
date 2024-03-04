@@ -183,9 +183,9 @@ object TestCodeCoverage : Project({
 
 object TestCodeCoverage_CheckTestCoverage : BuildType({
     name = "CheckTestCoverage"
-
+    DslContext.addParameters("MyFlagEnabled" to "true")
     params {
-        checkbox("system.coverage", "true", display = ParameterDisplay.PROMPT,
+        checkbox("TightenCoverage", "true", display = ParameterDisplay.PROMPT,
                   checked = "true", unchecked = "false")
     }
 
@@ -200,7 +200,12 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             scriptMode = script {
                 content = """
                     echo "Started Working"
-                    echo %system.coverage%
+                    if("%TightenCoverage%" -eq 'false')
+                    {
+                        DslContext.clearParameters()
+                        DslContext.addParameters("MyFlagEnabled" to "false")
+                    }
+                    echo %TightenCoverage%
                 """.trimIndent()
             }
         }
@@ -218,7 +223,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
 
     failureConditions {
         failOnText {
-            enabled = DslContext.getParameter(name = "TightenCoverage") == "true"
+            enabled = DslContext.getParameter(name = "MyFlagEnabled") == "true"
             conditionType = BuildFailureOnText.ConditionType.CONTAINS
             pattern = "Working"
             failureMessage = "Good job"
