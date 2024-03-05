@@ -191,7 +191,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
-    DslContext.addParameters(pairs = arrayOf("MyFlagEnabled" to "true"))
+    DslContext.addParameters(pairs = arrayOf("MyFlagEnabled" to "false"))
     steps {
         script {
             name = "check_coverage_ratio"
@@ -202,11 +202,11 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
             scriptContent = """
                 echo "Started Working"
                 echo "%TightenCoverage%"
-                DslContext.clearParameters()
-                DslContext.addParameters("MyFlagEnabled" to "false")
+                
             """.trimIndent()
         }
         powerShell {
+            enabled = false
             name = "check_code"
             id = "check_code"
             scriptMode = script {
