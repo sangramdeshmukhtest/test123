@@ -191,8 +191,21 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
-
+    DslContext.addParameters("MyFlagEnabled" to "true")
     steps {
+        script {
+            name = "check_coverage_ratio"
+            id = "check_coverage_ratio"
+            conditions {
+                equals("TightenCoverage", "false")
+            }
+            scriptContent = """
+                echo "Started Working"
+                echo "%TightenCoverage%"
+                DslContext.clearParameters()
+                DslContext.addParameters("MyFlagEnabled" to "false")
+            """.trimIndent()
+        }
         powerShell {
             name = "check_code"
             id = "check_code"
@@ -200,12 +213,6 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
                 content = """
                     echo "Started Working"
                     echo "%TightenCoverage%"
-                    if("%TightenCoverage%" -eq 'false')
-                    {
-                        DslContext.clearParameters()
-                        DslContext.addParameters(Pair("MyFlagEnabled", "false"))
-                    }
-                    echo %TightenCoverage%
                 """.trimIndent()
             }
         }
@@ -215,7 +222,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
         vcs {
             enabled = false
             quietPeriodMode = VcsTrigger.QuietPeriodMode.USE_CUSTOM
-            quietPeriod = 10
+            quietPeriod = 5
             perCheckinTriggering = true
             enableQueueOptimization = false
         }
