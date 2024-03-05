@@ -191,8 +191,7 @@ object TestCodeCoverage_CheckTestCoverage : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
-    if ("true".equals("%TightenCoverage%"))
-        DslContext.addParameters(pairs = arrayOf("MyFlagEnabled" to "true"))
+    DslContext.addParameters(pairs = arrayOf("MyFlagEnabled" to "true"))
     steps {
         script {
             name = "check_coverage_ratio"
