@@ -182,16 +182,12 @@ object TestCodeCoverage : Project({
 })
 
 
-fun checkCoverage(coverage: String): String {
-    return if (coverage == "true") "it's true" else "it's false"
-}
 object TestCodeCoverage_CheckTestCoverage : BuildType({
     name = "CheckTestCoverage"
     params {
         checkbox("TightenCoverage", "true",
                   checked = "true", unchecked = "false")
     }
-    checkCoverage("%TightenCoverage%")
     vcs {
         root(DslContext.settingsRoot)
     }
